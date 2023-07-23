@@ -1,68 +1,15 @@
-import {
-  GraphQLBoolean,
-  GraphQLFloat,
-  GraphQLInputObjectType,
-  GraphQLInt,
-  GraphQLNonNull,
-  GraphQLObjectType,
-  GraphQLString,
-} from 'graphql';
-import { UUIDType } from './uuid.js';
+import { GraphQLBoolean, GraphQLNonNull, GraphQLObjectType } from 'graphql';
+import { UUIDType } from '../types/uuid.js';
 import { FastifyInstance } from 'fastify';
-import { MemberTypeId, PostType, UserType, ProfileType } from './RootQuery.js';
-
-const createPost = new GraphQLInputObjectType({
-  name: 'CreatePostInput',
-  fields: {
-    title: { type: new GraphQLNonNull(GraphQLString) },
-    content: { type: new GraphQLNonNull(GraphQLString) },
-    authorId: { type: new GraphQLNonNull(UUIDType) },
-  },
-});
-
-const createUser = new GraphQLInputObjectType({
-  name: 'CreateUserInput',
-  fields: {
-    name: { type: new GraphQLNonNull(GraphQLString) },
-    balance: { type: new GraphQLNonNull(GraphQLFloat) },
-  },
-});
-
-const createProfile = new GraphQLInputObjectType({
-  name: 'CreateProfileInput',
-  fields: {
-    isMale: { type: new GraphQLNonNull(GraphQLBoolean) },
-    yearOfBirth: { type: new GraphQLNonNull(GraphQLInt) },
-    memberTypeId: { type: new GraphQLNonNull(MemberTypeId) },
-    userId: { type: new GraphQLNonNull(UUIDType) },
-  },
-});
-
-const changePost = new GraphQLInputObjectType({
-  name: 'ChangePostInput',
-  fields: {
-    title: { type: GraphQLString },
-    content: { type: GraphQLString },
-    authorId: { type: UUIDType },
-  },
-});
-
-const changeUser = new GraphQLInputObjectType({
-  name: 'ChangeUserInput',
-  fields: {
-    name: { type: GraphQLString },
-    balance: { type: GraphQLFloat },
-  },
-});
-
-const changeProfile = new GraphQLInputObjectType({
-  name: 'ChangeProfileInput',
-  fields: {
-    isMale: { type: GraphQLBoolean },
-    yearOfBirth: { type: GraphQLInt },
-    memberTypeId: { type: MemberTypeId },
-  },
-});
+import { PostType, UserType, ProfileType } from '../types/typeQuery.js';
+import {
+  createPost,
+  createUser,
+  changeProfile,
+  changePost,
+  changeUser,
+  createProfile,
+} from '../types/typeMutation.js';
 
 export const RootMutation = new GraphQLObjectType({
   name: 'Mutation',
